@@ -1,15 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import "@fontsource/poppins/latin-400.css";
-import "@fontsource/poppins/latin-500.css";
-import "@fontsource/poppins/latin-600.css";
-import "@fontsource/poppins/latin-700.css";
-import "@fontsource/inter/latin-400.css";
-import "@fontsource/inter/latin-500.css";
-import "@fontsource/inter/latin-600.css";
-import "@fontsource/inter/latin-700.css";
 import "lenis/dist/lenis.css";
 import "./globals.css";
+import { inter, poppins } from "./fonts";
 import SmoothScroll from "@/components/SmoothScroll";
+import AnimationPauser from "@/components/AnimationPauser";
 
 export const metadata: Metadata = {
   title: "Ikonnect Talentum Arrow | AI, Data, Automation & Computer Vision",
@@ -25,9 +19,10 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <body>
         <SmoothScroll>{children}</SmoothScroll>
+        <AnimationPauser />
       </body>
     </html>
   );

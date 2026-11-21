@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Mail, MapPin, Phone } from "lucide-react";
 import Logo from "./Logo";
 import { LinkedInIcon, PlayCircleIcon, XIcon, YouTubeIcon } from "./SocialIcons";
@@ -40,13 +40,13 @@ export default function Footer() {
   return (
     <footer id="contact" className="footer">
       <Stagger className="container footer__top" each={0.07} amount={0.25}>
-        <motion.a href="#home" className="footer__brand" variants={fadeUp} aria-label="Ikonnect Talentum Arrow – back to top">
+        <m.a href="#home" className="footer__brand" variants={fadeUp} aria-label="Ikonnect Talentum Arrow – back to top">
           <Logo className="logo--lg" idPrefix="ftr" />
-        </motion.a>
+        </m.a>
         <span className="footer__vr" aria-hidden="true" />
 
         {COLS.map((col) => (
-          <motion.div key={col.title} className="footer__col" variants={fadeUp}>
+          <m.div key={col.title} className="footer__col" variants={fadeUp}>
             <h4>{col.title}</h4>
             <ul>
               {col.links.map(([label, href]) => (
@@ -55,10 +55,10 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </m.div>
         ))}
 
-        <motion.div className="footer__col footer__contact" variants={fadeUp}>
+        <m.div className="footer__col footer__contact" variants={fadeUp}>
           <h4>Contact Us</h4>
           <ul>
             <li>
@@ -74,10 +74,10 @@ export default function Footer() {
               <span>Chennai, Tamil Nadu, India</span>
             </li>
           </ul>
-        </motion.div>
+        </m.div>
         <span className="footer__vr" aria-hidden="true" />
 
-        <motion.div className="footer__col" variants={fadeUp}>
+        <m.div className="footer__col" variants={fadeUp}>
           <h4>Follow Us</h4>
           <div className="socials">
             {SOCIALS.map(({ label, Icon, href }) => (
@@ -86,7 +86,7 @@ export default function Footer() {
               </a>
             ))}
           </div>
-        </motion.div>
+        </m.div>
       </Stagger>
 
       <div className="container footer__bottom">

@@ -9,13 +9,13 @@ type RibbonProps = {
 
 /**
  * Glowing neon-green "silk" ribbon used along section edges.
- * Pure SVG + CSS animation (no JS), so it is cheap to render many times.
+ * The SVG is painted once; only the <svg> element itself is animated (transform/opacity),
+ * so the browser moves a cached layer on the GPU instead of re-drawing blurred paths every frame.
  */
 export default function Ribbon({ id, className = "", flip = false, strands = 9 }: RibbonProps) {
   const g = `rb-${id}-g`;
   const gf = `rb-${id}-gf`;
   const blur = `rb-${id}-b`;
-  const sheen = `rb-${id}-s`;
 
   const lines = Array.from({ length: strands }, (_, i) => {
     const k = i - strands / 2;
@@ -36,18 +36,6 @@ export default function Ribbon({ id, className = "", flip = false, strands = 9 }
             <stop offset="0" stopColor="#3dff6e" stopOpacity="0.55" />
             <stop offset="0.5" stopColor="#10b981" stopOpacity="0.12" />
             <stop offset="1" stopColor="#0ea5e9" stopOpacity="0" />
-          </linearGradient>
-          <linearGradient id={sheen} x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0.4" stopColor="#e4ffd6" stopOpacity="0" />
-            <stop offset="0.5" stopColor="#e4ffd6" stopOpacity="0.95" />
-            <stop offset="0.6" stopColor="#e4ffd6" stopOpacity="0" />
-            <animateTransform
-              attributeName="gradientTransform"
-              type="translate"
-              values="-0.7 0; 0.7 0"
-              dur="7s"
-              repeatCount="indefinite"
-            />
           </linearGradient>
           <filter id={blur} x="-20%" y="-50%" width="140%" height="200%">
             <feGaussianBlur stdDeviation="14" />
@@ -74,9 +62,6 @@ export default function Ribbon({ id, className = "", flip = false, strands = 9 }
           {lines.map((d, i) => (
             <path key={i} d={d} strokeWidth={i === Math.floor(strands / 2) ? 2.2 : 1} opacity={0.35 + (i % 3) * 0.2} />
           ))}
-          {/* travelling light sheen along the brightest strands */}
-          <path d={lines[Math.floor(strands / 2)]} stroke={`url(#${sheen})`} strokeWidth="3" opacity="0.9" />
-          <path d={lines[Math.floor(strands / 2) - 2]} stroke={`url(#${sheen})`} strokeWidth="1.6" opacity="0.6" />
         </g>
       </svg>
     </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type HTMLMotionProps, type Variants } from "framer-motion";
+import { m, type HTMLMotionProps, type Variants } from "framer-motion";
 
 export const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -29,7 +29,7 @@ type RevealProps = HTMLMotionProps<"div"> & { delay?: number; y?: number; amount
 /** Fades + lifts its children into view once, when scrolled to. */
 export function Reveal({ delay = 0, y = 28, amount = 0.25, children, ...rest }: RevealProps) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount }}
@@ -37,7 +37,7 @@ export function Reveal({ delay = 0, y = 28, amount = 0.25, children, ...rest }: 
       {...rest}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -50,7 +50,7 @@ export function Stagger({
   ...rest
 }: HTMLMotionProps<"div"> & { each?: number; delay?: number; amount?: number }) {
   return (
-    <motion.div
+    <m.div
       variants={stagger(each, delay)}
       initial="hidden"
       whileInView="show"
@@ -58,7 +58,7 @@ export function Stagger({
       {...rest}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 

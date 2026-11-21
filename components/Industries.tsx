@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import {
   Building2,
   CarFront,
@@ -39,7 +39,7 @@ export default function Industries() {
 
         <Stagger className="ind-grid" each={0.06} amount={0.3}>
           {INDUSTRIES.map(({ icon: Icon, label }) => (
-            <motion.a
+            <m.a
               key={label[0]}
               href="#contact"
               className="ind spot"
@@ -52,12 +52,12 @@ export default function Industries() {
                 <br />
                 {label[1]}
               </span>
-            </motion.a>
+            </m.a>
           ))}
-          <motion.a href="#contact" className="ind ind--more spot" variants={popIn} onPointerMove={spotlight}>
+          <m.a href="#contact" className="ind ind--more spot" variants={popIn} onPointerMove={spotlight}>
             <Plus strokeWidth={1.8} />
             <span>And More</span>
-          </motion.a>
+          </m.a>
         </Stagger>
       </div>
     </section>

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { CircleCheck, Clock, Handshake, Users } from "lucide-react";
 import CountUp from "./CountUp";
 import { Stagger, fadeUp } from "./motion";
@@ -17,13 +17,13 @@ export default function Stats() {
     <section id="impact" className="stats">
       <div className="stats__glow" aria-hidden="true" />
       <Stagger className="container stats__inner" each={0.1} amount={0.5}>
-        <motion.h2 variants={fadeUp}>
+        <m.h2 variants={fadeUp}>
           Our Impact{" "}
           <br />
           in Numbers
-        </motion.h2>
+        </m.h2>
         {STATS.map(({ icon: Icon, to, suffix, label }) => (
-          <motion.div key={label} className="stat" variants={fadeUp}>
+          <m.div key={label} className="stat" variants={fadeUp}>
             <Icon className="stat__icon" strokeWidth={1.5} />
             <div>
               <div className="stat__num">
@@ -31,7 +31,7 @@ export default function Stats() {
               </div>
               <div className="stat__label">{label}</div>
             </div>
-          </motion.div>
+          </m.div>
         ))}
       </Stagger>
     </section>

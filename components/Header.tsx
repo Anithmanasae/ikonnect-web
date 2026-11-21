@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
 import Logo from "./Logo";
 import { EASE } from "./motion";
@@ -100,12 +100,7 @@ export default function Header() {
   const indicatorOn = hovered ?? active;
 
   return (
-    <motion.header
-      className={`header ${scrolled ? "is-scrolled" : ""}`}
-      initial={{ y: -40, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.9, ease: EASE }}
-    >
+    <header className={`header ${scrolled ? "is-scrolled" : ""}`}>
       <div className="container container--wide header__inner">
         <a href="#home" className="header__logo" aria-label="Ikonnect Talentum Arrow – home">
           <Logo idPrefix="hdr" />
@@ -132,7 +127,7 @@ export default function Header() {
                 {item.label}
                 {item.children && <ChevronDown className="nav__chev" size={14} strokeWidth={2.4} />}
                 {indicatorOn === item.label && (
-                  <motion.span
+                  <m.span
                     layoutId="nav-indicator"
                     className="nav__indicator"
                     transition={{ type: "spring", stiffness: 420, damping: 34 }}
@@ -142,7 +137,7 @@ export default function Header() {
 
               <AnimatePresence>
                 {item.children && openMenu === item.label && (
-                  <motion.div
+                  <m.div
                     className="dropdown"
                     initial={{ opacity: 0, y: 10, scale: 0.97 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -156,7 +151,7 @@ export default function Header() {
                         <ArrowRight size={14} className="dropdown__arrow" />
                       </a>
                     ))}
-                  </motion.div>
+                  </m.div>
                 )}
               </AnimatePresence>
             </div>
@@ -180,7 +175,7 @@ export default function Header() {
 
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
+          <m.div
             className="mobile-nav"
             initial={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
             animate={{ opacity: 1, clipPath: "inset(0 0 0% 0)" }}
@@ -188,13 +183,13 @@ export default function Header() {
             transition={{ duration: 0.5, ease: EASE }}
             data-lenis-prevent
           >
-            <motion.ul
+            <m.ul
               initial="hidden"
               animate="show"
               variants={{ hidden: {}, show: { transition: { staggerChildren: 0.04, delayChildren: 0.12 } } }}
             >
               {NAV.map((item) => (
-                <motion.li
+                <m.li
                   key={item.label}
                   variants={{ hidden: { opacity: 0, x: -16 }, show: { opacity: 1, x: 0 } }}
                 >
@@ -206,15 +201,15 @@ export default function Header() {
                     {item.label}
                     <ArrowRight size={16} />
                   </a>
-                </motion.li>
+                </m.li>
               ))}
-            </motion.ul>
+            </m.ul>
             <a href="#contact" className="btn btn--primary" onClick={() => setMobileOpen(false)}>
               Get in Touch <ArrowRight size={17} strokeWidth={2.4} className="arrow" />
             </a>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </header>
   );
 }

@@ -2,22 +2,16 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { motion, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
+import { m, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
 import { ArrowRight, Cpu, Eye, Play, Settings } from "lucide-react";
 import Particles from "./Particles";
 import Ribbon from "./Ribbon";
-import { EASE } from "./motion";
 
 const CARDS = [
   { icon: Cpu, title: "AI", sub: "Smart Solutions" },
   { icon: Settings, title: "Automation", sub: "Higher Efficiency" },
   { icon: Eye, title: "Computer Vision", sub: "Visual Intelligence" },
 ];
-
-const line = {
-  hidden: { y: "110%" },
-  show: (i: number) => ({ y: "0%", transition: { duration: 1.05, delay: 0.25 + i * 0.12, ease: EASE } }),
-};
 
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -57,50 +51,36 @@ export default function Hero() {
       <Ribbon id="hero-r" className="hero__ribbon-right" flip strands={11} />
 
       <div className="container hero__inner">
-        <motion.div className="hero__content" style={{ y: contentY, opacity: contentFade }}>
-          <motion.p
-            className="hero__eyebrow"
-            initial={{ opacity: 0, letterSpacing: "0.5em" }}
-            animate={{ opacity: 1, letterSpacing: "0.28em" }}
-            transition={{ duration: 1.2, delay: 0.1, ease: EASE }}
-          >
+        <m.div className="hero__content" style={{ y: contentY, opacity: contentFade }}>
+          {/* Intro animations are pure CSS so they start at first paint, not after JavaScript loads. */}
+          <p className="hero__eyebrow intro intro--eyebrow">
             AI <i>|</i> Data <i>|</i> Automation <i>|</i> Computer Vision
-          </motion.p>
+          </p>
 
-          <motion.h1 initial="hidden" animate="show">
+          <h1>
             <span className="line-mask">
-              <motion.span className="hero__l1" variants={line} custom={0}>
+              <span className="hero__l1 intro intro--line" style={{ animationDelay: "0.2s" }}>
                 Not Just Technology,
-              </motion.span>
+              </span>
             </span>
             <span className="line-mask">
-              <motion.span className="hero__l2" variants={line} custom={1}>
+              <span className="hero__l2 intro intro--line" style={{ animationDelay: "0.32s" }}>
                 It’s a <span className="text-grad">Smarter</span>
-              </motion.span>
+              </span>
             </span>
             <span className="line-mask">
-              <motion.span className="hero__l2" variants={line} custom={2}>
+              <span className="hero__l2 intro intro--line" style={{ animationDelay: "0.44s" }}>
                 Way to <span className="text-grad">Grow.</span>
-              </motion.span>
+              </span>
             </span>
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            className="hero__lead"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.75, ease: EASE }}
-          >
+          <p className="hero__lead intro intro--up" style={{ animationDelay: "0.4s" }}>
             Ikonnect Talentum Arrow Pvt. Ltd. builds AI-powered solutions that transform businesses, automate
             processes, and bring intelligence to every frame.
-          </motion.p>
+          </p>
 
-          <motion.div
-            className="hero__actions"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.9, ease: EASE }}
-          >
+          <div className="hero__actions intro intro--up" style={{ animationDelay: "0.55s" }}>
             <a href="#services" className="btn btn--primary">
               Explore Our AI Solutions <ArrowRight size={18} strokeWidth={2.4} className="arrow" />
             </a>
@@ -110,17 +90,12 @@ export default function Hero() {
               </span>
               Watch Our Story
             </a>
-          </motion.div>
-        </motion.div>
+          </div>
+        </m.div>
 
-        <motion.div className="hero__art" style={{ y: artY }}>
-          <motion.div
-            className="hero__art-inner"
-            style={{ x: artX, y: artYm }}
-            initial={{ opacity: 0, scale: 1.08, filter: "blur(14px)" }}
-            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-            transition={{ duration: 1.6, delay: 0.15, ease: EASE }}
-          >
+        <m.div className="hero__art" style={{ y: artY }}>
+          <div className="hero__art-intro intro intro--art">
+            <m.div className="hero__art-inner" style={{ x: artX, y: artYm }}>
             <Image
               src="/images/hero-ai.webp"
               alt="AI visualisation – a digital human profile surrounded by neural circuitry over a city skyline"
@@ -131,23 +106,24 @@ export default function Hero() {
               fetchPriority="high"
               className="hero__art-img"
             />
+            {/* The image paints at full strength immediately (counts for LCP); this veil fades off it. */}
+            <span className="hero__art-veil" aria-hidden="true" />
             <span className="hero__ping" aria-hidden="true">
               <span />
               <span />
             </span>
-          </motion.div>
-        </motion.div>
+            </m.div>
+          </div>
+        </m.div>
 
-        <motion.div className="hero__cards" style={{ y: cardsY }}>
+        <m.div className="hero__cards" style={{ y: cardsY }}>
           {CARDS.map(({ icon: Icon, title, sub }, i) => (
-            <motion.div
+            <div
               key={title}
-              className={`hero-card-wrap hero-card-wrap--${i + 1}`}
-              initial={{ opacity: 0, x: 60 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.1, delay: 0.7 + i * 0.15, ease: EASE }}
+              className={`hero-card-wrap hero-card-wrap--${i + 1} intro intro--card`}
+              style={{ animationDelay: `${0.5 + i * 0.12}s` }}
             >
-              <motion.div style={{ x: cardX, y: cardYm }}>
+              <m.div style={{ x: cardX, y: cardYm }}>
                 <div className="hero-card" style={{ animationDelay: `${i * -1.6}s` }}>
                   <Icon className="hero-card__icon" strokeWidth={1.6} />
                   <div>
@@ -155,10 +131,10 @@ export default function Hero() {
                     <span>{sub}</span>
                   </div>
                 </div>
-              </motion.div>
-            </motion.div>
+              </m.div>
+            </div>
           ))}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

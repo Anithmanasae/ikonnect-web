@@ -2,7 +2,9 @@
 
 import { useEffect } from "react";
 import Lenis from "lenis";
-import { MotionConfig, motion, useScroll, useSpring } from "framer-motion";
+import { LazyMotion, MotionConfig, m, useScroll, useSpring } from "framer-motion";
+
+const loadFeatures = () => import("./motion-features").then((mod) => mod.default);
 
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
@@ -29,15 +31,17 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
   }, []);
 
   return (
-    <MotionConfig reducedMotion="user">
-      <ScrollProgress />
-      {children}
-    </MotionConfig>
+    <LazyMotion features={loadFeatures} strict>
+      <MotionConfig reducedMotion="user">
+        <ScrollProgress />
+        {children}
+      </MotionConfig>
+    </LazyMotion>
   );
 }
 
 function ScrollProgress() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 140, damping: 30, mass: 0.3 });
-  return <motion.div className="scroll-progress" style={{ scaleX }} aria-hidden="true" />;
+  return <m.div className="scroll-progress" style={{ scaleX }} aria-hidden="true" />;
 }

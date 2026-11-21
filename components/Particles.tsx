@@ -82,18 +82,34 @@ export default function Particles({ className = "", density = 0.00006 }: { class
       if (!reduce) frame = requestAnimationFrame(loop);
     };
 
-    resize();
-    loop();
+    let ro: ResizeObserver | undefined;
+    let io: IntersectionObserver | undefined;
+    const onVisibility = () => {
+      cancelAnimationFrame(frame);
+      if (!document.hidden) loop();
+    };
 
-    const ro = new ResizeObserver(resize);
-    ro.observe(canvas);
-    const io = new IntersectionObserver(([entry]) => (visible = entry.isIntersecting));
-    io.observe(canvas);
+    // Decorative only: wait until the page has finished its critical work.
+    const start = () => {
+      resize();
+      loop();
+      ro = new ResizeObserver(resize);
+      ro.observe(canvas);
+      io = new IntersectionObserver(([entry]) => (visible = entry.isIntersecting));
+      io.observe(canvas);
+      document.addEventListener("visibilitychange", onVisibility);
+    };
+    const idle = window.requestIdleCallback
+      ? window.requestIdleCallback(start, { timeout: 2500 })
+      : window.setTimeout(start, 1200);
 
     return () => {
+      if (window.cancelIdleCallback) window.cancelIdleCallback(idle);
+      else window.clearTimeout(idle);
       cancelAnimationFrame(frame);
-      ro.disconnect();
-      io.disconnect();
+      ro?.disconnect();
+      io?.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
     };
   }, [density]);
 

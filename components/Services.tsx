@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { ArrowRight, ClipboardCheck, Database, FileText, Mic, Tag, Video } from "lucide-react";
 import Ribbon from "./Ribbon";
 import { Reveal, Stagger, popIn, spotlight } from "./motion";
@@ -29,7 +29,7 @@ export default function Services() {
 
         <Stagger className="services__grid" each={0.08} amount={0.2}>
           {SERVICES.map(({ img, icon: Icon, title }) => (
-            <motion.a
+            <m.a
               key={img}
               href="#contact"
               className="svc-card spot"
@@ -49,7 +49,7 @@ export default function Services() {
                 </h3>
               </div>
               <ArrowRight className="svc-card__arrow" size={20} strokeWidth={2} />
-            </motion.a>
+            </m.a>
           ))}
         </Stagger>
       </div>

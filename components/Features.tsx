@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Globe, Layers, ShieldCheck, Users } from "lucide-react";
 import { Stagger, fadeUp } from "./motion";
 
@@ -16,7 +16,7 @@ export default function Features() {
     <section className="features" aria-label="Why Ikonnect">
       <Stagger className="container features__grid" each={0.1} amount={0.4}>
         {ITEMS.map(({ icon: Icon, title, text, teal }) => (
-          <motion.div key={title} className="feature" variants={fadeUp}>
+          <m.div key={title} className="feature" variants={fadeUp}>
             <span className={`feature__icon ${teal ? "is-teal" : ""}`}>
               <Icon strokeWidth={1.5} />
             </span>
@@ -24,7 +24,7 @@ export default function Features() {
               <h3>{title}</h3>
               <p>{text}</p>
             </div>
-          </motion.div>
+          </m.div>
         ))}
       </Stagger>
     </section>

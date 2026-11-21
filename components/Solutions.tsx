@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { m, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Ribbon from "./Ribbon";
 import { EASE, Stagger, fadeUp } from "./motion";
@@ -17,7 +17,7 @@ export default function Solutions() {
     <section id="solutions" className="solutions">
       <Ribbon id="sol-l" className="solutions__ribbon" />
       <div className="container">
-        <motion.div
+        <m.div
           ref={ref}
           className="sol"
           initial={{ opacity: 0, y: 40, scale: 0.98 }}
@@ -26,7 +26,7 @@ export default function Solutions() {
           transition={{ duration: 1.1, ease: EASE }}
         >
           <div className="sol__robot">
-            <motion.div className="sol__img" style={{ x: leftX }}>
+            <m.div className="sol__img" style={{ x: leftX }}>
               <Image
                 src="/images/banner-robot.webp"
                 alt="Industrial robotic arm on an automated production line"
@@ -34,28 +34,28 @@ export default function Solutions() {
                 sizes="(max-width: 900px) 100vw, 30vw"
                 quality={90}
               />
-            </motion.div>
+            </m.div>
           </div>
 
           <Stagger className="sol__copy" each={0.1} delay={0.2} amount={0.4}>
-            <motion.h2 variants={fadeUp}>
+            <m.h2 variants={fadeUp}>
               <span className="text-grad">AI Solutions</span> with
               <br />
               Real-World Impact
-            </motion.h2>
-            <motion.p variants={fadeUp}>
+            </m.h2>
+            <m.p variants={fadeUp}>
               From computer vision to intelligent automation, our AI solutions are designed to deliver accuracy, speed
               and efficiency — at scale.
-            </motion.p>
-            <motion.div variants={fadeUp}>
+            </m.p>
+            <m.div variants={fadeUp}>
               <a href="#contact" className="btn btn--primary btn--sm">
                 View Case Studies <ArrowRight size={17} strokeWidth={2.4} className="arrow" />
               </a>
-            </motion.div>
+            </m.div>
           </Stagger>
 
           <div className="sol__vision">
-            <motion.div className="sol__img" style={{ x: rightX }}>
+            <m.div className="sol__img" style={{ x: rightX }}>
               <Image
                 src="/images/banner-vision.webp"
                 alt="Computer vision detecting vehicles in traffic and an analyst reviewing medical scans"
@@ -63,12 +63,12 @@ export default function Solutions() {
                 sizes="(max-width: 900px) 100vw, 52vw"
                 quality={90}
               />
-            </motion.div>
+            </m.div>
             <span className="sol__scan" aria-hidden="true">
               <span />
             </span>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );
