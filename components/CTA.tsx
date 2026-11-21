@@ -5,6 +5,7 @@ import Image from "next/image";
 import { m, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Ribbon from "./Ribbon";
+import mountainImg from "@/public/images/cta-mountain.webp";
 import { Stagger, fadeUp } from "./motion";
 
 export default function CTA() {
@@ -17,7 +18,7 @@ export default function CTA() {
     <section id="cta" ref={ref} className="cta">
       <div className="cta__media" aria-hidden="true">
         <m.div className="cta__img" style={{ y, scale }}>
-          <Image src="/images/cta-mountain.webp" alt="" fill sizes="(max-width: 900px) 100vw, 55vw" quality={90} />
+          <Image src={mountainImg} alt="" fill sizes="(max-width: 900px) 100vw, 55vw" quality={90} />
         </m.div>
         <span className="cta__sun" />
       </div>

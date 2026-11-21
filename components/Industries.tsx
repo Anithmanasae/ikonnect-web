@@ -19,7 +19,7 @@ const INDUSTRIES = [
   { icon: CarFront, label: ["Automotive", "& Mobility"] },
   { icon: HeartPulse, label: ["Healthcare", "& Life Sciences"] },
   { icon: Factory, label: ["Manufacturing", "& Industrial"] },
-  { icon: ShoppingCart, label: ["Retail &", "E-commerce"] },
+  { icon: ShoppingCart, label: ["Retail &", "E‑commerce"] },
   { icon: GraduationCap, label: ["Education", "& EdTech"] },
   { icon: SquarePlay, label: ["Media &", "Entertainment"] },
   { icon: Landmark, label: ["Banking &", "Financial Services"] },

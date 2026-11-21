@@ -7,8 +7,9 @@ import { LinkedInIcon, PlayCircleIcon, XIcon, YouTubeIcon } from "./SocialIcons"
 import { Stagger, fadeUp } from "./motion";
 
 const COLS = [
-  { title: "Quick Links", links: [["Home", "#home"], ["About Us", "#about"], ["Case Studies", "#solutions"], ["Careers", "#cta"]] },
+  { id: "quick", title: "Quick Links", links: [["Home", "#home"], ["About Us", "#about"], ["Case Studies", "#solutions"], ["Careers", "#cta"]] },
   {
+    id: "services",
     title: "Our Services",
     links: [
       ["Speech & Audio Data", "#services"],
@@ -18,12 +19,13 @@ const COLS = [
     ],
   },
   {
+    id: "industries",
     title: "Industries",
     links: [
       ["Automotive", "#industries"],
       ["Healthcare", "#industries"],
       ["Manufacturing", "#industries"],
-      ["Retail & E-commerce", "#industries"],
+      ["Retail & E‑commerce", "#industries"],
     ],
   },
 ];
@@ -46,7 +48,7 @@ export default function Footer() {
         <span className="footer__vr" aria-hidden="true" />
 
         {COLS.map((col) => (
-          <m.div key={col.title} className="footer__col" variants={fadeUp}>
+          <m.div key={col.title} className={`footer__col footer__col--${col.id}`} variants={fadeUp}>
             <h4>{col.title}</h4>
             <ul>
               {col.links.map(([label, href]) => (
@@ -77,7 +79,7 @@ export default function Footer() {
         </m.div>
         <span className="footer__vr" aria-hidden="true" />
 
-        <m.div className="footer__col" variants={fadeUp}>
+        <m.div className="footer__col footer__follow" variants={fadeUp}>
           <h4>Follow Us</h4>
           <div className="socials">
             {SOCIALS.map(({ label, Icon, href }) => (

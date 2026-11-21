@@ -350,7 +350,9 @@ button {
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 60;
-  animation: introHeader 0.9s var(--ease) both;
+  /* "backwards" (not "both"): once finished, the animation must stop applying a transform,
+     otherwise the header becomes the containing block for the fixed mobile menu. */
+  animation: introHeader 0.9s var(--ease) backwards;
   height: var(--header-h);
   border-bottom: 1px solid transparent;
   transition:
@@ -363,11 +365,27 @@ button {
 
 .header.is-scrolled {
   height: 70px;
+  border-bottom-color: var(--line);
+  box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.8);
+}
+
+/* Frosted background lives on a pseudo-element: a backdrop-filter on the header itself
+   would trap the fixed mobile menu inside the header's 70px box. */
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background: rgba(2, 20, 38, 0.78);
   -webkit-backdrop-filter: blur(18px) saturate(150%);
   backdrop-filter: blur(18px) saturate(150%);
-  border-bottom-color: var(--line);
-  box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  transition: opacity 0.45s;
+  pointer-events: none;
+}
+
+.header.is-scrolled::before {
+  opacity: 1;
 }
 
 .header__inner {
@@ -404,6 +422,7 @@ button {
   font-size: clamp(13px, 1.02vw, 14.5px);
   font-weight: 500;
   color: #eef4fa;
+  white-space: nowrap;
   transition: color 0.3s;
 }
 
@@ -1900,8 +1919,13 @@ button {
 
 .footer__bottom nav {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 18px;
+  gap: 6px 18px;
+}
+
+.footer__bottom a {
+  white-space: nowrap;
 }
 
 .footer__bottom nav span {
@@ -1919,7 +1943,7 @@ button {
 /* =========================================================
    RESPONSIVE
    ========================================================= */
-@media (max-width: 1180px) {
+@media (max-width: 1199px) {
   .nav,
   .header__cta {
     display: none;
@@ -1929,6 +1953,33 @@ button {
     display: grid;
   }
 
+  .features__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 18px;
+  }
+
+  .feature:nth-child(3)::before {
+    display: none;
+  }
+
+  .feature:nth-child(odd) {
+    padding-left: 0;
+  }
+}
+
+/* Small laptops / landscape tablets: keep the hero text clear of the artwork */
+@media (min-width: 1001px) and (max-width: 1199px) {
+  .hero__content {
+    width: min(440px, 39%);
+  }
+
+  .hero__art {
+    left: 39%;
+    width: 42%;
+  }
+}
+
+@media (max-width: 1180px) {
   .services__grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -2041,19 +2092,6 @@ button {
     background: linear-gradient(135deg, rgba(16, 66, 72, 0.9), rgba(4, 30, 52, 0.92));
   }
 
-  .features__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    row-gap: 18px;
-  }
-
-  .feature:nth-child(3)::before {
-    display: none;
-  }
-
-  .feature:nth-child(odd) {
-    padding-left: 0;
-  }
-
   .about__grid {
     grid-template-columns: 1fr;
     gap: 30px;
@@ -2117,6 +2155,12 @@ button {
     width: 80px;
     height: 1px;
     background: linear-gradient(90deg, rgba(160, 230, 210, 0.7), transparent);
+  }
+}
+
+@media (max-width: 1000px) and (orientation: landscape) and (max-height: 560px) {
+  .hero__art {
+    max-height: 78vh;
   }
 }
 
@@ -2244,14 +2288,65 @@ button {
     font-size: 11px;
   }
 
-  .footer__contact {
+  /* Footer: short lists side by side, long ones full width */
+  .footer__top {
+    grid-auto-flow: row dense;
+  }
+
+  .footer__col--services,
+  .footer__contact,
+  .footer__follow {
     grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 420px) {
+  .footer__bottom nav span {
+    display: none;
+  }
+
+  /* Service cards: icon above the title so titles get the full card width */
+  .svc-card__body {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px 12px 34px;
+  }
+}
+
+@media (max-width: 374px) {
+  .ind-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ind--more {
+    grid-column: 1 / -1;
+    min-height: 64px;
+  }
+
+  .hero__eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.14em !important;
   }
 }
 
 @media (max-width: 360px) {
   .stats__inner {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Touch screens: give small text links a comfortable tap area (24px+ tall) */
+@media (pointer: coarse) {
+  .footer__col ul a,
+  .footer__bottom a {
+    display: inline-block;
+    padding-block: 6px;
+  }
+
+  .footer__col li + li,
+  .footer__contact li + li {
+    margin-top: 0;
   }
 }
 

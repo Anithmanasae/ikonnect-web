@@ -6,6 +6,7 @@ import { m, useMotionValue, useScroll, useSpring, useTransform } from "framer-mo
 import { ArrowRight, Cpu, Eye, Play, Settings } from "lucide-react";
 import Particles from "./Particles";
 import Ribbon from "./Ribbon";
+import heroImg from "@/public/images/hero-ai.webp";
 
 const CARDS = [
   { icon: Cpu, title: "AI", sub: "Smart Solutions" },
@@ -97,7 +98,7 @@ export default function Hero() {
           <div className="hero__art-intro intro intro--art">
             <m.div className="hero__art-inner" style={{ x: artX, y: artYm }}>
             <Image
-              src="/images/hero-ai.webp"
+              src={heroImg}
               alt="AI visualisation – a digital human profile surrounded by neural circuitry over a city skyline"
               fill
               sizes="(max-width: 900px) 100vw, 56vw"

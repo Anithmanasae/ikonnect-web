@@ -5,6 +5,8 @@ import Image from "next/image";
 import { m, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Ribbon from "./Ribbon";
+import robotImg from "@/public/images/banner-robot.webp";
+import visionImg from "@/public/images/banner-vision.webp";
 import { EASE, Stagger, fadeUp } from "./motion";
 
 export default function Solutions() {
@@ -28,7 +30,7 @@ export default function Solutions() {
           <div className="sol__robot">
             <m.div className="sol__img" style={{ x: leftX }}>
               <Image
-                src="/images/banner-robot.webp"
+                src={robotImg}
                 alt="Industrial robotic arm on an automated production line"
                 fill
                 sizes="(max-width: 900px) 100vw, 30vw"
@@ -57,7 +59,7 @@ export default function Solutions() {
           <div className="sol__vision">
             <m.div className="sol__img" style={{ x: rightX }}>
               <Image
-                src="/images/banner-vision.webp"
+                src={visionImg}
                 alt="Computer vision detecting vehicles in traffic and an analyst reviewing medical scans"
                 fill
                 sizes="(max-width: 900px) 100vw, 52vw"

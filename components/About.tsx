@@ -5,6 +5,7 @@ import Image from "next/image";
 import { m, useScroll, useTransform } from "framer-motion";
 import { Cpu, Globe, ShieldCheck, Users } from "lucide-react";
 import Ribbon from "./Ribbon";
+import aboutImg from "@/public/images/about-building.webp";
 import { EASE, Stagger, fadeUp } from "./motion";
 
 const POINTS = [
@@ -41,7 +42,7 @@ export default function About() {
           >
             <m.div className="about__img" style={{ scale, y }}>
               <Image
-                src="/images/about-building.webp"
+                src={aboutImg}
                 alt="Ikonnect Talentum Arrow office building at dusk"
                 fill
                 sizes="(max-width: 900px) 100vw, 48vw"
