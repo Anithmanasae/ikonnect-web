@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { m, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
-import { ArrowRight, Cpu, Eye, Play, Settings } from "lucide-react";
+import { ArrowRight, Cpu, Eye, Settings } from "lucide-react";
 import Particles from "./Particles";
 import Ribbon from "./Ribbon";
 import heroImg from "@/public/images/hero-ai.webp";
@@ -84,12 +84,6 @@ export default function Hero() {
           <div className="hero__actions intro intro--up" style={{ animationDelay: "0.55s" }}>
             <a href="#services" className="btn btn--primary">
               Explore Our AI Solutions <ArrowRight size={18} strokeWidth={2.4} className="arrow" />
-            </a>
-            <a href="#about" className="btn btn--ghost">
-              <span className="play-dot">
-                <Play size={12} fill="currentColor" strokeWidth={0} />
-              </span>
-              Watch Our Story
             </a>
           </div>
         </m.div>

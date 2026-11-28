@@ -236,52 +236,6 @@ button {
   transform: translateX(130%);
 }
 
-.btn--ghost {
-  color: #fff;
-  border: 1.5px solid rgba(255, 255, 255, 0.85);
-  background: rgba(255, 255, 255, 0.04);
-  padding-left: 16px;
-}
-
-.btn--ghost:hover {
-  transform: translateY(-2px);
-  border-color: var(--green);
-  background: rgba(91, 227, 75, 0.1);
-  box-shadow: 0 10px 30px -12px rgba(91, 227, 75, 0.6);
-}
-
-.play-dot {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: #fff;
-  color: #04182c;
-  padding-left: 2px;
-}
-
-.play-dot::after {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  animation: ping 2.2s var(--ease) infinite;
-}
-
-@keyframes ping {
-  0% {
-    transform: scale(1);
-    opacity: 0.7;
-  }
-  100% {
-    transform: scale(1.9);
-    opacity: 0;
-  }
-}
-
 /* ---------- logo ---------- */
 .logo {
   display: inline-flex;
