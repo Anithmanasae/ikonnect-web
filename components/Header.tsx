@@ -42,7 +42,7 @@ const NAV: NavItem[] = [
       { label: "Manufacturing & Industrial", href: "#industries" },
       { label: "Retail & E-commerce", href: "#industries" },
       { label: "Banking & Financial Services", href: "#industries" },
-      { label: "Smart Cities & Surveillance", href: "#industries" },
+      { label: "Robotics & Automation", href: "#industries" },
     ],
   },
   { label: "Case Studies", href: "#solutions" },

@@ -2,13 +2,13 @@
 
 import { m } from "framer-motion";
 import {
-  Building2,
   CarFront,
   Factory,
   GraduationCap,
   HeartPulse,
   Landmark,
   Plus,
+  RobotArm,
   ShoppingCart,
   SquarePlay,
 } from "lucide-react";
@@ -23,7 +23,7 @@ const INDUSTRIES = [
   { icon: GraduationCap, label: ["Education", "& EdTech"] },
   { icon: SquarePlay, label: ["Media &", "Entertainment"] },
   { icon: Landmark, label: ["Banking &", "Financial Services"] },
-  { icon: Building2, label: ["Smart Cities", "& Surveillance"] },
+  { icon: RobotArm, label: ["Robotics", "& Automation"] },
 ];
 
 export default function Industries() {
